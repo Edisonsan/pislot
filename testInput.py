@@ -45,13 +45,9 @@ _door_prev_status = False;
 GPIO.add_event_detect(_gpio_13, GPIO.FALLING)
 GPIO.add_event_detect(_gpio_15, GPIO.FALLING)
 
+
 try:
   while True:
-#    if GPIO.input(_gpio_counter_in):
-#      print('Counter In\n')
-
-#    if GPIO.input(_gpio_counter_out):
-#      print('Counter Out\n')
 
     if GPIO.event_detected(_gpio_13):
       print('Counter IN LOW\n')
@@ -59,59 +55,20 @@ try:
     if GPIO.event_detected(_gpio_15):
       print('Counter OUT LOW\n')
 
-    if(GPIO.input(5)):
-        print('5')
-
-    if(GPIO.input(6)):
-        print('6')
-
-    if(GPIO.input(13)):
-        print('13')
-
-    if(GPIO.input(19)):
-        print('19')
-
-    if(GPIO.input(26)):
-        print('26')
-
-    if(GPIO.input(18)):
-        print('18')
-
-    if(GPIO.input(23)):
-        print('23')
-
-    if(GPIO.input(24)):
-        print('24')
-
-    if(GPIO.input(25)):
-        print('25')
-
-    if(GPIO.input(12)):
-        print('12')
-
-    if(GPIO.input(16)):
-        print('16')
-
-    if(GPIO.input(20)):
-        print('20')
-
-    if(GPIO.input(21)):
-        print('21')
-
     if GPIO.input(_gpio_door):
       if not _door_open:
-	_door_open = True
-    	_door_prev_status = False;
+        _door_open = True
+        _door_prev_status = False;
 
       if(_door_open):
-        GPIO.output(_gpio_power, GPIO.HIGH)
+        GPIO.output(_gpio_power, GPIO.LOW)
         if not _door_prev_status:
           print('Door Closed')
           print('Slot Machine Power Supply ON')
 
       _door_prev_status = True
     else:
-      GPIO.output(_gpio_power, GPIO.LOW)
+      GPIO.output(_gpio_power, GPIO.HIGH)
       if(_door_open):
         print('Door Open')
 
@@ -121,5 +78,3 @@ try:
     sleep(0.1)
 finally:
   GPIO.cleanup()
-
-
